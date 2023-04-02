@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ConcertDB.DAL;
 using ConcertDB.DAL.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ConcertDB.Controllers
 {
@@ -19,18 +20,44 @@ namespace ConcertDB.Controllers
             _context = context;
         }
 
-      
 
-
-        // GET: Tickets
-        public async Task<IActionResult> Index()
+        //// GET: Tickets
+        public async Task<IActionResult> Index(String searchString)
         {
-              return _context.Tickets != null ? 
-                          View(await _context.Tickets.ToListAsync()) :
-                          Problem("Entity set 'DatabaseContext.Tickets'  is null.");
+            if (_context.Tickets == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Tickets'  is null.");
+            }
+            var Tickets = from m in _context.Tickets
+                          select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            //   if (searchGuid != Guid.Empty)
+            {
+                if (searchString.Count() >= 32) {
+                    Guid searchGuid = new Guid(searchString);
+                    Tickets = Tickets.Where(s => s.Id.Equals(searchGuid));
+
+                    if (Tickets.Count() == 0)
+                    {
+                        ViewData["ShowModal"] = "True";
+                        Tickets = from m in _context.Tickets
+                                      select m;
+                    }
+                }else
+                {
+                    ViewData["ShowModal"] = "True";
+                }
+
+
+            }
+
+            return View(await Tickets.ToListAsync());
         }
 
-        // GET: Tickets/Details/5
+        // GET: Tickets/Details/5}
+
+
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Tickets == null)
