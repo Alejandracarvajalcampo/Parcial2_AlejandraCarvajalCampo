@@ -10,5 +10,12 @@ namespace ConcertDB.DAL
 
         }
         public DbSet<Tickets> Tickets { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Tickets>().HasIndex(t => t.Id).IsUnique();
+
+        }
     }
 }
