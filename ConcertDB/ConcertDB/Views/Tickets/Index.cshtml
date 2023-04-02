@@ -59,16 +59,14 @@
                 @Html.DisplayFor(modelItem => item.EntranceGate)
             </td>
             <td>
-                                        @if (item.IsUsed == false)
-                                        {
-                                            <a asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-outline-warning">Editar</a>
-                                        }
-                                        else
-                                        {
-                                            <a asp-action="Details" asp-route-Id="@item.Id" class="btn btn-outline-info">Detalles</a>
-                                        }
-                    
-                    
+                @if (item.IsUsed == false)
+                {
+                    <a asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-outline-warning">Editar</a>
+                }
+                else
+                {
+                    <a asp-action="Details" asp-route-Id="@item.Id" class="btn btn-outline-info">Detalles</a>
+                }
                     </td>
                     </tr>
                       }
@@ -88,9 +86,15 @@
         <script>
             $(document).ready(function () {
                 var showModal = "@ViewData["ShowModal"]";
+                var messageModal = "@ViewData["MessageModal"]";
+               
                 if (showModal == "True") {
-                    alert("Boleta no Valida");
+                    alert(" Boleta no valida ");
                 }
+                if (messageModal != "") {
+                    alert(messageModal);
+                }
+                
             });
         </script>
     }

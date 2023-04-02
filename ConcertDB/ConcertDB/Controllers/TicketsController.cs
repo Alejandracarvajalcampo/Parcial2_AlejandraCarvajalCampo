@@ -41,8 +41,21 @@ namespace ConcertDB.Controllers
                     if (Tickets.Count() == 0)
                     {
                         ViewData["ShowModal"] = "True";
+                        
                         Tickets = from m in _context.Tickets
                                       select m;
+                    }
+                    else
+                    {
+                        if (Tickets.First().IsUsed) 
+                        {
+                            ViewData["MessageModal"] = " Esta boleta esta siendo usada para ver el detalle presione al boton DETALLES ";
+                        } 
+                        else 
+                        {
+                            ViewData["MessageModal"] = " Esta boleta esta disponible presione al boton EDITAR "; }
+                        
+
                     }
                 }else
                 {
