@@ -2,17 +2,22 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+</head>
 
   <form asp-controller="Tickets" asp-action="Index" method="get">
     <p>
-        Id: <input type="text" name="searchString" />
-        <input type="submit" value="Filter" />
+        Codigo: <input type="text" name="searchString" />
+        <input type="submit" value="Buscar" />
     </p>
 </form>
 
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+
 
 <h1>Boletos</h1>
 
@@ -82,7 +87,7 @@
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
   
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
             $(document).ready(function () {
                 var showModal = "@ViewData["ShowModal"]";

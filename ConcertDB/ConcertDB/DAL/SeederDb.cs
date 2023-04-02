@@ -25,7 +25,7 @@ namespace ConcertDB.DAL
         {
             if (!_context.Tickets.Any())
             {
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= 50000; i++)
                 {
                     _context.Tickets.Add(new Tickets { UseDate = null, IsUsed = false, EntranceGate = null });
                 }

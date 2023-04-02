@@ -49,7 +49,11 @@ namespace ConcertDB.Controllers
                     {
                         if (Tickets.First().IsUsed) 
                         {
-                            ViewData["MessageModal"] = " Esta boleta esta siendo usada para ver el detalle presione al boton DETALLES ";
+                            ViewData["MessageModal"] =
+                                "Esta boleta esta siendo usada en la localidad : " + Tickets.First().EntranceGate + 
+                                " Y se registro el ingreso en la fecha y hora siguiente : "  + Tickets.First().UseDate +
+                                "para ver mejor el detalle presione al boton DETALLES ";
+
                         } 
                         else 
                         {
